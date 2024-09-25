@@ -2,6 +2,7 @@
 #include <string>
 #include <set>
 #include <cmath>
+#include <stdexcept>
 #include "sudoku.h"
 using namespace std;
 
@@ -23,14 +24,14 @@ Sudoku::Sudoku(const Sudoku& grid): Grid(grid){
 
 Sudoku::~Sudoku(){}
 
-Sudoku::void checkGrid(){
-    if (grid.GRID_SIZE != 9) {
+void Sudoku::checkGrid(){
+    if (this->GRID_SIZE != 9) {
         throw runtime_error("grid.size() != 9");
     }
-    if (grid.BOX_LEN != 3) {
+    if (this->BOX_LEN != 3) {
         throw runtime_error("grid.BOX_LEN != 3");
     }
-    if (grid.BOX_SIZE != 9) {
+    if (this->BOX_SIZE != 9) {
         throw runtime_error("grid.BOX_SIZE != 9");
     }
 }
@@ -38,7 +39,7 @@ Sudoku::void checkGrid(){
 vector<int> Sudoku::findPossibleValues(int row, int col)
 {
     set<int> possibleValues;
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 9; i++)
     {
         possibleValues.insert(i + 1);
     }
@@ -73,7 +74,7 @@ vector<vector<vector<int>>> Sudoku::findAllPossibleValues()
             }
             else if (grid[i][j] == 0)
             {
-                allPossibleValues[i][j].push_back(findPossibleValues(i, j));
+                allPossibleValues[i][j] = findPossibleValues(i, j);
             }
         }
     }

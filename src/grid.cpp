@@ -1,51 +1,43 @@
-#include "grid.h"       
 #include <vector>
 #include <string>
 #include <iostream>
+#include <cmath>
+#include "grid.h"
 using namespace std; 
 
-Grid::Grid(){
-    
-}
-
-Grid::Grid(string grid){
-    vector<vector<int>> temp;
-    for (int i = 0; i < grid.size(); i++)
-    {
-        vector<int> row;
-        for (int j = 0; j < grid.size(); j++)
-        {
-            row.push_back(grid[i * grid.size() + j] - '0');
+vector<vector<int>> Grid::convertTo2DVector(const vector<int>& grid) {
+    int size = sqrt(grid.size());
+    vector<vector<int>> temp(size, vector<int>(size));
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            temp[i][j] = grid[i * size + j];
         }
-        temp.push_back(row);
     }
-    Grid(temp);
+    return temp;
 }
 
-Grid::Grid(vector<int> grid){
-    vector<vector<int>> temp;
-    for (int i = 0; i < grid.size(); i++)
-    {
-        vector<int> row;
-        for (int j = 0; j < grid.size(); j++)
-        {
-            row.push_back(grid[i * grid.size() + j]);
+vector<vector<int>> Grid::convertTo2DVector(const string& grid) {
+    int size = sqrt(grid.size());
+    if (size * size != grid.size()) {
+        throw invalid_argument("String length must be a perfect square.");
+    }
+    vector<vector<int>> temp(size, vector<int>(size));
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            temp[i][j] = grid[i * size + j] - '0'; // 假设字符串中的每个字符是一个数字
         }
-        temp.push_back(row);
     }
-    Grid(temp);
+    return temp;
 }
 
-Grid::Grid(const vector<vector<int>>& grid, int box_len){
-    if (grid.size() != grid[0].size()) {
-        throw runtime_error("grid.size() != grid[0].size()");
-    }
-    if (GRID_SIZE % box_len != 0) {
-        throw runtime_error("grid.size() % box_len != 0");
-    }
+Grid::Grid(const string& grid): Grid(convertTo2DVector(grid)){}
+
+Grid::Grid(const vector<int>& grid): Grid(convertTo2DVector(grid)){}
+
+Grid::Grid(const vector<vector<int>>& grid){
     this->GRID_SIZE = grid.size();
-    this->BOX_LEN = box_len;
-    this->BOX_SIZE = box_len * box_len;
+    this->BOX_SIZE = this->GRID_SIZE;
+    this->BOX_LEN = sqrt(this->GRID_SIZE);
     this->grid = grid;
 }
 

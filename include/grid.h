@@ -10,10 +10,10 @@ class Grid {
         int GRID_SIZE;
     
     public:
-        Grid();
-        Grid(string grid);
-        Grid(vector<int> grid);
-        Grid(vector<vector<int>> grid);
+        Grid() = delete;
+        Grid(const string& grid);
+        Grid(const vector<int>& grid);
+        Grid(const vector<vector<int>>& grid);
         Grid(const Grid& grid);
         ~Grid();
 
@@ -21,4 +21,7 @@ class Grid {
         vector<int> getColumn(int col);
         int getBox(int row, int col);
         void printGrid();
+
+        static vector<vector<int>> convertTo2DVector(const string& grid);
+        static vector<vector<int>> convertTo2DVector(const vector<int>& grid);
 };

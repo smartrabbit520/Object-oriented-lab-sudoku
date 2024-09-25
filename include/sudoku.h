@@ -3,7 +3,7 @@
 #include "grid.h"
 using namespace std;
 
-class Sudoku : protected Grid {
+class Sudoku : public Grid {
     public:
         Sudoku() = delete;
         Sudoku(const string& grid);
