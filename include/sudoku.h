@@ -6,8 +6,9 @@ using namespace std;
 class Sudoku : public Grid {
     private:
         vector<vector<int>> grid;
-        const int BOX_SIZE;
-        const int GRID_SIZE;
+        const int BOX_SIZE = 9;
+        const int BOX_LEN = 3;
+        const int GRID_SIZE = 9;
     
     public:
         Sudoku();
@@ -23,5 +24,5 @@ class Sudoku : public Grid {
         void printGrid();
 
         vector<int> findPossibleValues(int row, int col);
-        vector<vector<int>> findAllPossibleValues();
+        vector<vector<vector<int>>> findAllPossibleValues();
 };

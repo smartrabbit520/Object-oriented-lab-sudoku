@@ -6,6 +6,7 @@ class Grid {
     private:
         vector<vector<int>> grid;
         int BOX_SIZE;
+        int BOX_LEN;
         int GRID_SIZE;
     
     public:

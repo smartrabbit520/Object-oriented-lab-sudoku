@@ -21,21 +21,31 @@ vector<int> Sudoku::findPossibleValues(int row, int col)
     {
         possibleValues.erase(grid[i][col]);
     }
-    for (int i = 0; i < sqrt(BOX_SIZE); i++)
+    for (int i = 0; i < sqrt(BOX_LEN); i++)
     {
-        for (int j = 0; j < sqrt(BOX_SIZE); j++)
+        for (int j = 0; j < sqrt(BOX_LEN); j++)
         {
-            row: 5  col: 7
-            第六行第八列
-            3,4,5行
-            6,7,8列
-            0-2 + 5 / 3 * 3
-            possibleValues.erase(grid[i + (row / BOX_SIZE) * BOX_SIZE][j + (col / BOX_SIZE) * BOX_SIZE]);
+            possibleValues.erase(grid[i + (row / BOX_LEN) * BOX_LEN][j + (col / BOX_LEN) * BOX_LEN]);
         }
     }
+    return vector<int>(possibleValues.begin(), possibleValues.end());
 }
 
-vector<vector<int>> Sudoku::findAllPossibleValues()
+vector<vector<vector<int>>> Sudoku::findAllPossibleValues()
 {
-    return vector<vector<int>>();
+    vector<vector<vector<int>>> allPossibleValues(GRID_SIZE, vector<vector<int>>(GRID_SIZE));
+    for (int i = 0; i < GRID_SIZE; i++)
+    {
+        for (int j = 0; j < GRID_SIZE; j++)
+        {
+            if (grid[i][j] != 0){
+                allPossibleValues[i][j].push_back(grid[i][j]);
+            }
+            else if (grid[i][j] == 0)
+            {
+                allPossibleValues[i][j].push_back(findPossibleValues(i, j));
+            }
+        }
+    }
+    return allPossibleValues;
 }
