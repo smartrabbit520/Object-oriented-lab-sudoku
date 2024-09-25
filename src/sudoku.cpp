@@ -5,6 +5,36 @@
 #include "sudoku.h"
 using namespace std;
 
+Sudoku::Sudoku(const string& grid): Grid(grid){
+    checkGrid();
+}
+
+Sudoku::Sudoku(const vector<int>& grid): Grid(grid){
+    checkGrid();
+}
+
+Sudoku::Sudoku(const vector<vector<int>>& grid): Grid(grid){
+    checkGrid();
+}
+
+Sudoku::Sudoku(const Sudoku& grid): Grid(grid){
+    checkGrid();
+}
+
+Sudoku::~Sudoku(){}
+
+Sudoku::void checkGrid(){
+    if (grid.GRID_SIZE != 9) {
+        throw runtime_error("grid.size() != 9");
+    }
+    if (grid.BOX_LEN != 3) {
+        throw runtime_error("grid.BOX_LEN != 3");
+    }
+    if (grid.BOX_SIZE != 9) {
+        throw runtime_error("grid.BOX_SIZE != 9");
+    }
+}
+
 vector<int> Sudoku::findPossibleValues(int row, int col)
 {
     set<int> possibleValues;

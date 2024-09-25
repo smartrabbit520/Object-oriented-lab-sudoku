@@ -3,7 +3,7 @@
 using namespace std;
 
 class Grid {
-    private:
+    protected:
         vector<vector<int>> grid;
         int BOX_SIZE;
         int BOX_LEN;
@@ -17,8 +17,8 @@ class Grid {
         Grid(const Grid& grid);
         ~Grid();
 
-        int getRow(int row);
-        int getColumn(int col);
-        int getBox(int row, int col);
-        void printGrid();
+        virtual int getRow(int row);
+        virtual int getColumn(int col);
+        virtual int getBox(int row, int col);
+        virtual void printGrid();
 };
