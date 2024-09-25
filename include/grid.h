@@ -17,8 +17,8 @@ class Grid {
         Grid(const Grid& grid);
         ~Grid();
 
-        virtual int getRow(int row);
-        virtual int getColumn(int col);
-        virtual int getBox(int row, int col);
-        virtual void printGrid();
+        vector<int> getRow(int row);
+        vector<int> getColumn(int col);
+        int getBox(int row, int col);
+        void printGrid();
 };

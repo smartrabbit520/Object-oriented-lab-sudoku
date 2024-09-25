@@ -60,22 +60,22 @@ Grid::~Grid(){
 
 }
 
-virtual int Grid::getRow(int row){
+vector<int> Grid::getRow(int row){
     return grid[row];
 }
 
-virtual int Grid::getColumn(int col){
+vector<int> Grid::getColumn(int col){
     for (int i = 0; i < GRID_SIZE; i++)
     {
         cout << grid[i][col] << endl;
     }
 }
 
-virtual int Grid::getBox(int row, int col){
+int Grid::getBox(int row, int col){
     return grid[row][col];
 }
 
-virtual void Grid::printGrid(){
+void Grid::printGrid(){
     for (int i = 0; i < GRID_SIZE; i++)
     {
         for (int j = 0; j < GRID_SIZE; j++)
