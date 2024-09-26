@@ -30,6 +30,20 @@ vector<vector<int>> Grid::convertTo2DVector(const string& grid) {
     return temp;
 }
 
+Grid::Grid(int grid_size, int box_size){
+    // initialize grid with 0
+    if (grid_size % box_size != 0) {
+        throw invalid_argument("Grid size must be divisible by box size.");
+    }
+    if (int(sqrt(box_size)) * int(sqrt(box_size)) != box_size) {
+        throw invalid_argument("Grid size must be a perfect square.");
+    }
+    this->GRID_SIZE = grid_size;
+    this->BOX_SIZE = box_size;
+    this->BOX_LEN = sqrt(box_size);
+    this->grid = vector<vector<int>>(grid_size, vector<int>(grid_size));
+}
+
 Grid::Grid(const string& grid): Grid(convertTo2DVector(grid)){}
 
 Grid::Grid(const vector<int>& grid): Grid(convertTo2DVector(grid)){}

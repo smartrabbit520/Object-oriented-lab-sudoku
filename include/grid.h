@@ -11,6 +11,7 @@ class Grid {
     
     public:
         Grid() = delete;
+        Grid(int grid_size, int box_size);
         Grid(const string& grid);
         Grid(const vector<int>& grid);
         Grid(const vector<vector<int>>& grid);

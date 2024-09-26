@@ -6,6 +6,10 @@
 #include "sudoku.h"
 using namespace std;
 
+Sudoku::Sudoku(int grid_size, int box_size): Grid(grid_size, box_size){
+    checkGrid();
+}
+
 Sudoku::Sudoku(const string& grid): Grid(grid){
     checkGrid();
 }
