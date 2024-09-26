@@ -40,6 +40,50 @@ void Sudoku::checkGrid(){
     }
 }
 
+bool Sudoku::setRow(int row, const vector<int>& values){
+    for (int i = 0; i < values.size(); i++)
+    {
+        if (values[i] < 0 || values[i] > 9) {
+            throw invalid_argument("Values must be between 0 and 9.");
+            return false;
+        }
+    }
+    return super::setRow(row, values);
+}
+
+bool Sudoku::setColumn(int col, const vector<int>& values){
+    for (int i = 0; i < values.size(); i++)
+    {
+        if (values[i] < 0 || values[i] > 9) {
+            throw invalid_argument("Values must be between 0 and 9.");
+            return false;
+        }
+    }
+    return super::setColumn(col, values);
+}
+
+bool Sudoku::setBox(int row, int col, int value){
+    if (value < 0 || value > 9) {
+        throw invalid_argument("Value must be between 0 and 9.");
+        return false;
+    }
+    return super::setBox(row, col, value);
+}
+
+bool Sudoku::setGrid(const vector<vector<int>>& grid){
+    for (int i = 0; i < grid.size(); i++)
+    {
+        for (int j = 0; j < grid[i].size(); j++)
+        {
+            if (grid[i][j] < 0 || grid[i][j] > 9) {
+                throw invalid_argument("Values must be between 0 and 9.");
+                return false;
+            }
+        }
+    }
+    return super::setGrid(grid);
+}
+
 vector<int> Sudoku::findPossibleValues(int row, int col)
 {
     set<int> possibleValues;
