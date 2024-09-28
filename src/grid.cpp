@@ -95,10 +95,12 @@ vector<int> Grid::getRow(int row) const {
 }
 
 vector<int> Grid::getColumn(int col) const {
+    vector<int> temp;
     for (int i = 0; i < GRID_SIZE; i++)
     {
-        cout << grid[i][col] << endl;
+        temp.push_back(grid[i][col]);
     }
+    return temp;
 }
 
 int Grid::getBox(int row, int col) const {

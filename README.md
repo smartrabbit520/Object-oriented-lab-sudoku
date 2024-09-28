@@ -40,25 +40,40 @@
     cd build
     ```
 3. 编译并构建项目
+* linux:
     ```sh
     cmake ..
     make
     ```
+* windows:
+    ```sh
+    cmake ..
+    cmake --build .
+    ```
 4. 运行可执行文件
+* linux:
     ```sh
     ./SudokuSolver
     ```
-
+* windows:
+    ```sh
+    ./Debug/SudokuSolver.exe
+    ```
 ### Python
 
 1. 安装python
 
 2. 运行Python测试脚本：
+* linux
     ```sh
     cd python
     python3 test.py
     ```
-
+* windows
+    ```sh
+    cd python
+    python test.py
+    ```
 ## C++部分代码介绍
 
 ### Grid 类

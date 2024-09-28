@@ -109,7 +109,7 @@ void gridGetSetTest(){
     cout << endl;
 }
 
-bool grid_test(){
+void grid_test(){
     cout << "grid test" << endl;
     gridConstructorTest();
     gridGetSetTest();
