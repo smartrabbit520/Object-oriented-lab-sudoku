@@ -28,7 +28,7 @@ Sudoku::Sudoku(const Sudoku& grid): Grid(grid){
 
 Sudoku::~Sudoku(){}
 
-void Sudoku::checkGrid(){
+void Sudoku::checkGrid() const {
     if (this->GRID_SIZE != 9) {
         throw invalid_argument("grid.size() must be 9. grid.size(): " + to_string(this->GRID_SIZE));
     }
@@ -84,8 +84,7 @@ bool Sudoku::setGrid(const vector<vector<int>>& grid){
     return Grid::setGrid(grid);
 }
 
-vector<int> Sudoku::findPossibleValues(int row, int col)
-{
+vector<int> Sudoku::findPossibleValues(int row, int col) const {
     set<int> possibleValues;
     for (int i = 0; i < 9; i++)
     {
@@ -110,8 +109,7 @@ vector<int> Sudoku::findPossibleValues(int row, int col)
     return vector<int>(possibleValues.begin(), possibleValues.end());
 }
 
-vector<vector<vector<int>>> Sudoku::findAllPossibleValues()
-{
+vector<vector<vector<int>>> Sudoku::findAllPossibleValues() const {
     vector<vector<vector<int>>> allPossibleValues(GRID_SIZE, vector<vector<int>>(GRID_SIZE));
     for (int i = 0; i < GRID_SIZE; i++)
     {

@@ -90,18 +90,18 @@ bool Grid::operator==(const Grid& grid){
     return true;
 }
 
-vector<int> Grid::getRow(int row){
+vector<int> Grid::getRow(int row) const {
     return grid[row];
 }
 
-vector<int> Grid::getColumn(int col){
+vector<int> Grid::getColumn(int col) const {
     for (int i = 0; i < GRID_SIZE; i++)
     {
         cout << grid[i][col] << endl;
     }
 }
 
-int Grid::getBox(int row, int col){
+int Grid::getBox(int row, int col) const {
     return grid[row][col];
 }
 
@@ -163,7 +163,7 @@ bool Grid::setGrid(const vector<vector<int>>& grid){
     return true;
 }
 
-void Grid::printGrid(){
+void Grid::printGrid() const {
     for (int i = 0; i < GRID_SIZE; i++)
     {
         for (int j = 0; j < GRID_SIZE; j++)
