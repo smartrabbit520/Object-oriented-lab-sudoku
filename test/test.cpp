@@ -117,14 +117,94 @@ bool grid_test(){
 
 void sudokuConstructorTest(){
     cout << "sudoku constructor test" << endl;
+    cout<< "true input" << endl;
+    std:string s = "017903600000080000900000507072010430000402070064370250701000065000030000005601720";
+    Sudoku sudoku(s);
+    sudoku.printGrid();
+    cout << endl;
+
+    cout << "wrong input1" << endl;
+    try {
+        int grid_size = 16;
+        int box_size = 4;
+        Sudoku sudoku(grid_size, box_size);
+    } catch (const exception& e) {
+        cout << e.what() << endl;
+    }
+    cout << endl;
+    
+    cout << "wrong input2" << endl;
+    try {
+        int grid_size = 9;
+        int box_size = 1;
+        Sudoku sudoku(grid_size, box_size);
+    } catch (const exception& e) {
+        cout << e.what() << endl;
+    }
+    cout << endl;
 }
 
 void sudokuGetSetTest(){
     cout << "sudoku get set test" << endl;
+    std:string s = "017903600000080000900000507072010430000402070064370250701000065000030000005601720";
+    Sudoku sudoku(s);
+
+    cout << "original grid" << endl;
+    sudoku.printGrid();
+    cout << endl;
+    
+    vector<int> row = sudoku.getRow(0);
+    cout << "row 0: ";
+    for (int i = 0; i < row.size(); i++) {
+        cout << row[i] << " ";
+    }
+    cout << endl;
+
+    for (int i = 0; i < row.size(); i++) {
+        sudoku.setBox(0, i, 5);
+    }
+    cout << "modified grid" << endl;
+    sudoku.printGrid();
+    cout << endl;
+
+    // wrong input: > 10
+    try {
+        cout << "wrong input: > 10" << endl;
+        sudoku.setBox(0, 0, 11);
+    } catch (const exception& e) {
+        cout << e.what() << endl;
+    }
+    cout << endl;
+
+    // wrong input: < 0
+    try {
+        cout << "wrong input: < 0" << endl;
+        sudoku.setBox(0, 0, -1);
+    } catch (const exception& e) {
+        cout << e.what() << endl;
+    }
+    cout << endl;
 }
 
 void solveTest(){
     cout << "solve test" << endl;
+    std:string s = "017903600000080000900000507072010430000402070064370250701000065000030000005601720";
+    Sudoku sudoku(s);
+    sudoku.printGrid();
+    vector<vector<vector<int>>>result = sudoku.findAllPossibleValues();
+    for (int i = 0; i < result.size(); i++)
+    {
+        for (int j = 0; j < result[i].size(); j++)
+        {
+            cout << "row: " << i << " col: " << j << " possible values: ";
+            for (int k = 0; k < result[i][j].size(); k++)
+            {
+                cout << result[i][j][k] << " ";
+            }
+            cout << endl;
+        }
+    }
+    cout << endl;
 }
 
 void sudoku_test(){
