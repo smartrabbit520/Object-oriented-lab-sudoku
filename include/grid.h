@@ -1,3 +1,4 @@
+#pragma once
 #include <vector>
 #include <string>
 using namespace std;
@@ -17,6 +18,8 @@ class Grid {
         Grid(const vector<vector<int>>& grid);
         Grid(const Grid& grid);
         ~Grid();
+
+        bool operator==(const Grid& grid);
 
         vector<int> getRow(int row);
         vector<int> getColumn(int col);

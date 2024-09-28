@@ -19,7 +19,7 @@ vector<vector<int>> Grid::convertTo2DVector(const vector<int>& grid) {
 vector<vector<int>> Grid::convertTo2DVector(const string& grid) {
     int size = sqrt(grid.size());
     if (size * size != grid.size()) {
-        throw invalid_argument("String length must be a perfect square.");
+        throw invalid_argument("String length must be a perfect square. String length: " + to_string(grid.size()));
     }
     vector<vector<int>> temp(size, vector<int>(size));
     for (int i = 0; i < size; i++) {
@@ -31,12 +31,11 @@ vector<vector<int>> Grid::convertTo2DVector(const string& grid) {
 }
 
 Grid::Grid(int grid_size, int box_size){
-    // initialize grid with 0
-    if (grid_size % box_size != 0) {
-        throw invalid_argument("Grid size must be divisible by box size.");
-    }
     if (int(sqrt(box_size)) * int(sqrt(box_size)) != box_size) {
-        throw invalid_argument("Grid size must be a perfect square.");
+        throw invalid_argument("Box size must be a perfect square. Box size: " + to_string(box_size));
+    }
+    if (grid_size % int(sqrt(box_size)) != 0) {
+        throw invalid_argument("Grid size must be divisible by box len. Grid size: " + to_string(grid_size) + " Box size: " + to_string(box_size) + " Box len: " + to_string(int(sqrt(box_size))));
     }
     this->GRID_SIZE = grid_size;
     this->BOX_SIZE = box_size;
@@ -49,6 +48,9 @@ Grid::Grid(const string& grid): Grid(convertTo2DVector(grid)){}
 Grid::Grid(const vector<int>& grid): Grid(convertTo2DVector(grid)){}
 
 Grid::Grid(const vector<vector<int>>& grid){
+    if (grid.size() != grid[0].size()) {
+        throw invalid_argument("Grid must be square. Rows: " + to_string(grid.size()) + " Columns: " + to_string(grid[0].size()));
+    }
     this->GRID_SIZE = grid.size();
     this->BOX_SIZE = this->GRID_SIZE;
     this->BOX_LEN = sqrt(this->GRID_SIZE);
@@ -64,6 +66,28 @@ Grid::Grid(const Grid& grid){
 
 Grid::~Grid(){
 
+}
+
+bool Grid::operator==(const Grid& grid){
+    if (this->GRID_SIZE != grid.GRID_SIZE) {
+        return false;
+    }
+    if (this->BOX_SIZE != grid.BOX_SIZE) {
+        return false;
+    }
+    if (this->BOX_LEN != grid.BOX_LEN) {
+        return false;
+    }
+    for (int i = 0; i < GRID_SIZE; i++)
+    {
+        for (int j = 0; j < GRID_SIZE; j++)
+        {
+            if (this->grid[i][j] != grid.grid[i][j]) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 vector<int> Grid::getRow(int row){
@@ -83,11 +107,11 @@ int Grid::getBox(int row, int col){
 
 bool Grid::setRow(int row, const vector<int>& values){
     if (row >= GRID_SIZE || row < 0) {
-        throw invalid_argument("Row index out of range.");
+        throw invalid_argument("Row index out of range. Row: " + to_string(row));
         return false;
     }
     if (values.size() != GRID_SIZE) {
-        throw invalid_argument("Values size must be equal to grid size.");
+        throw invalid_argument("Values size must be equal to grid size. Values size: " + to_string(values.size()));
         return false;
     }
     grid[row] = values;
@@ -96,11 +120,11 @@ bool Grid::setRow(int row, const vector<int>& values){
 
 bool Grid::setColumn(int col, const vector<int>& values){
     if (col >= GRID_SIZE || col < 0) {
-        throw invalid_argument("Column index out of range.");
+        throw invalid_argument("Column index out of range. Column: " + to_string(col));
         return false;
     }
     if (values.size() != GRID_SIZE) {
-        throw invalid_argument("Values size must be equal to grid size.");
+        throw invalid_argument("Values size must be equal to grid size. Values size: " + to_string(values.size()));
         return false;
     }
     for (int i = 0; i < GRID_SIZE; i++)
@@ -112,11 +136,11 @@ bool Grid::setColumn(int col, const vector<int>& values){
 
 bool Grid::setBox(int row, int col, int value){
     if (row >= GRID_SIZE || row < 0) {
-        throw invalid_argument("Row index out of range.");
+        throw invalid_argument("Row index out of range. Row: " + to_string(row));
         return false;
     }
     if (col >= GRID_SIZE || col < 0) {
-        throw invalid_argument("Column index out of range.");
+        throw invalid_argument("Column index out of range. Column: " + to_string(col));
         return false;
     }
     grid[row][col] = value;
@@ -125,13 +149,13 @@ bool Grid::setBox(int row, int col, int value){
 
 bool Grid::setGrid(const vector<vector<int>>& grid){
     if (grid.size() != GRID_SIZE) {
-        throw invalid_argument("Grid size must be equal to grid size.");
+        throw invalid_argument("Grid size must be equal to grid size. Grid size: " + to_string(grid.size()));
         return false;
     }
     for (int i = 0; i < GRID_SIZE; i++)
     {
         if (grid[i].size() != GRID_SIZE) {
-            throw invalid_argument("Grid size must be equal to grid size.");
+            throw invalid_argument("Grid size must be equal to grid size. Grid size: " + to_string(grid[i].size()));
             return false;
         }
     }

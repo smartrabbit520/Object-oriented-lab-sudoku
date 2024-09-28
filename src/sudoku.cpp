@@ -30,13 +30,13 @@ Sudoku::~Sudoku(){}
 
 void Sudoku::checkGrid(){
     if (this->GRID_SIZE != 9) {
-        throw runtime_error("grid.size() != 9");
+        throw invalid_argument("grid.size() must be 9. grid.size(): " + to_string(this->GRID_SIZE));
     }
     if (this->BOX_LEN != 3) {
-        throw runtime_error("grid.BOX_LEN != 3");
+        throw invalid_argument("grid.BOX_LEN must be 3. grid.BOX_LEN: " + to_string(this->BOX_LEN));
     }
     if (this->BOX_SIZE != 9) {
-        throw runtime_error("grid.BOX_SIZE != 9");
+        throw invalid_argument("grid.BOX_SIZE must be 9. grid.BOX_SIZE: " + to_string(this->BOX_SIZE));
     }
 }
 
@@ -44,30 +44,30 @@ bool Sudoku::setRow(int row, const vector<int>& values){
     for (int i = 0; i < values.size(); i++)
     {
         if (values[i] < 0 || values[i] > 9) {
-            throw invalid_argument("Values must be between 0 and 9.");
+            throw invalid_argument("Values must be between 0 and 9. Value: " + to_string(values[i]));
             return false;
         }
     }
-    return super::setRow(row, values);
+    return Grid::setRow(row, values);
 }
 
 bool Sudoku::setColumn(int col, const vector<int>& values){
     for (int i = 0; i < values.size(); i++)
     {
         if (values[i] < 0 || values[i] > 9) {
-            throw invalid_argument("Values must be between 0 and 9.");
+            throw invalid_argument("Values must be between 0 and 9. Value: " + to_string(values[i]));
             return false;
         }
     }
-    return super::setColumn(col, values);
+    return Grid::setColumn(col, values);
 }
 
 bool Sudoku::setBox(int row, int col, int value){
     if (value < 0 || value > 9) {
-        throw invalid_argument("Value must be between 0 and 9.");
+        throw invalid_argument("Value must be between 0 and 9. Value: " + to_string(value));
         return false;
     }
-    return super::setBox(row, col, value);
+    return Grid::setBox(row, col, value);
 }
 
 bool Sudoku::setGrid(const vector<vector<int>>& grid){
@@ -76,12 +76,12 @@ bool Sudoku::setGrid(const vector<vector<int>>& grid){
         for (int j = 0; j < grid[i].size(); j++)
         {
             if (grid[i][j] < 0 || grid[i][j] > 9) {
-                throw invalid_argument("Values must be between 0 and 9.");
+                throw invalid_argument("Values must be between 0 and 9. Value: " + to_string(grid[i][j]));
                 return false;
             }
         }
     }
-    return super::setGrid(grid);
+    return Grid::setGrid(grid);
 }
 
 vector<int> Sudoku::findPossibleValues(int row, int col)

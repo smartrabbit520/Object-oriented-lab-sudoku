@@ -12,7 +12,7 @@ include_directories(include)
 set(SOURCES
     src/grid.cpp
     src/sudoku.cpp
-    test.cpp
+    test/test.cpp
 )
 
 # 添加可执行文件
